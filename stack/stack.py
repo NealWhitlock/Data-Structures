@@ -10,16 +10,55 @@ return elements in Last In First Out order.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
 """
+
+""" USING PYTHON LISTS AND METHODS """
+# class Stack:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         return self.size
+
+#     def push(self, value):
+#         self.storage.append(value)
+#         self.size += 1
+
+#     def pop(self):
+#         result = -1
+#         if not self.storage == []:
+#             result = self.storage.pop()
+#             self.size -= 1
+#         else:
+#             result = None
+
+#         return result
+
+
+""" USING LINKED LISTS """
+# import sys
+# sys.path.append('./singly_linked_list')
+from singly_linked_list import LinkedList
+
 class Stack:
     def __init__(self):
         self.size = 0
-        # self.storage = ?
-
+        self.storage = LinkedList()
+    
     def __len__(self):
-        pass
+        return self.size
 
     def push(self, value):
-        pass
+        self.storage.add_to_tail(value)
+        self.size += 1
 
     def pop(self):
-        pass
+        result = -1
+        if not self.size == 0:
+            result = self.storage.remove_tail()
+            self.size -= 1
+        else:
+            result = None
+
+        return result
+
