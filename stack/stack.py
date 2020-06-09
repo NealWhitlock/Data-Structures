@@ -25,19 +25,14 @@ return elements in Last In First Out order.
 #         self.size += 1
 
 #     def pop(self):
-#         result = -1
 #         if not self.storage == []:
-#             result = self.storage.pop()
 #             self.size -= 1
+            # return self.storage.pop()
 #         else:
-#             result = None
-
-#         return result
+#             return None
 
 
-""" USING LINKED LISTS """
-# import sys
-# sys.path.append('./singly_linked_list')
+""" USING SINGLY LINKED LISTS """
 from singly_linked_list import LinkedList
 
 class Stack:
@@ -53,12 +48,12 @@ class Stack:
         self.size += 1
 
     def pop(self):
-        result = -1
         if not self.size == 0:
-            result = self.storage.remove_tail()
             self.size -= 1
+            return self.storage.remove_tail()
         else:
-            result = None
+            return None
 
-        return result
+
+""" USING DOUBLY LINKED LISTS """
 

@@ -28,19 +28,14 @@ Stretch: What if you could only use instances of your Stack class to implement t
 #         self.size += 1
 
 #     def dequeue(self):
-#         result = -1
 #         if not self.storage == []:
-#             result = self.storage.pop(0)
 #             self.size -= 1
+#             return self.storage.pop(0)
 #         else:
-#             result = None
-        
-#         return result
+#             return None
 
 
-""" USING LINKED LISTS """
-# import sys
-# sys.path.append('./singly_linked_list')
+""" USING SINGLY LINKED LISTS """
 from singly_linked_list import LinkedList
 
 class Queue:
@@ -56,13 +51,12 @@ class Queue:
         self.size += 1
 
     def dequeue(self):
-        result = -1
         if not self.size == 0:
-            result = self.storage.remove_head()
             self.size -= 1
+            return self.storage.remove_head()
         else:
-            result = None
-        
-        return result
+            return None
 
+
+""" USING DOUBLY LINKED LISTS """
 
