@@ -73,19 +73,19 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
     def remove_from_head(self):
         # Check if head exists. If not, return None
-        if not self.head:
-            return None
+        # if not self.head:   # This check is unneeded
+        #     return None
         
         # Save current head value to return
         head_value = self.head.value
         
         # Check if head and tail are the same and set both to None if so
-        if self.head is self.tail:
-            self.head = None
-            self.tail = None
+        # if self.head is self.tail:  # This check happens in DLL delete
+        #     self.head = None
+        #     self.tail = None
 
         # Delete current head
-        self.delete(self.head)
+        self.delete(self.head)  # DLL delete
 
         return head_value
 
@@ -115,19 +115,19 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
     def remove_from_tail(self):
         # Check if tail exists. If not, return None
-        if not self.tail:
-            return None
+        # if not self.tail:
+        #     return None
         
         # Save current tail value to return
         tail_value = self.tail.value
         
         # Check if head and tail are the same and set both to None if so
-        if self.head is self.tail:
-            self.head = None
-            self.tail = None
+        # if self.head is self.tail:
+        #     self.head = None
+        #     self.tail = None
 
         # Delete current tail
-        self.delete(self.tail)
+        self.delete(self.tail)  # DLL delete
 
         return tail_value
 
@@ -135,14 +135,14 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
         # Check if node already head
-        if node is self.head:
-            return None
+        # if node is self.head:
+        #     return None
         
         # Save node's value
         node_value = node.value
 
         # Delete node
-        self.delete(node)
+        self.delete(node)  # DLL delete
 
         # Move node to head position
         self.add_to_head(node_value)
@@ -151,14 +151,14 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
         # Check if node already tail
-        if node is self.tail:
-            return None
+        # if node is self.tail:
+        #     return None
         
         # Save node's value
         node_value = node.value
 
         # Delete node
-        self.delete(node)
+        self.delete(node)  # DLL delete
 
         # Move node to tail position
         self.add_to_tail(node_value)
@@ -166,32 +166,44 @@ class DoublyLinkedList:
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
-        if self.head is self.tail:
+        # Check if DLL is empty
+        if not self.head and not self.tail:
+            return
+        # Check if only one element in DLL
+        elif self.head is self.tail:
             self.head = None
             self.tail = None
+        # Check if trying to delete head
         elif node is self.head:
             self.head = node.next
-            node.delete()
+            node.delete()  # Node class delete
+        # Check if trying to delete tail
         elif node is self.tail:
             self.tail = node.prev
-            node.delete()
+            node.delete()  # Node class delete
+        # All other instances of a node
         else:
-            node.delete()
+            node.delete()  # Node class delete
         
+        # Decrease length by one for the node being removed
         self.length -= 1
         
     """Returns the highest value currently in the list"""
     def get_max(self):
+        # If no head then there is no list
         if not self.head:
             return None
 
+        # Get the head's value
         high_val = self.head.value
+        # Get the head node as a whole
         current = self.head
 
+        # Move through each node in turn
         while current:
-            if current.value > high_val:
-                high_val = current.value
-            current = current.next
+            if current.value > high_val:  # Compare the new node's value to high
+                high_val = current.value  # If new node's value higher,save it
+            current = current.next  # Move to the next node
 
         return high_val                  
 

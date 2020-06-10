@@ -17,20 +17,68 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # Check if BST exists?
+
+        # Check if inserting value less than root's value
+        # If so, go left
+        if value < self.value:
+            if self.left is None:
+                self.left = BSTNode(value)  # Create new node
+            else:
+                self.left.insert(value)     # <-- Recursion
+        # Else, go right
+        else:
+            if self.right is None:
+                self.right = BSTNode(value) # Create new node
+            else:
+                self.right.insert(value)    # <-- Recursion
+
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # Check if target == self.value
+        # If so, return True
+        if self.value == target:
+            return True
+        else:
+            # Check if target < self.value. If so, move left
+            if target < self.value:
+                if self.left is None:  # End of the left line
+                    return False
+                else:
+                    return self.left.contains(target)  # Recurse from here
+            # Else, move right
+            else:
+                if self.right is None:  # End of the right line
+                    return False
+                else:
+                    return self.right.contains(target)  # Recurse from here
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # Check only right branches until reaching a None for self.right
+        # Return the value where this happens
+
+        #print(self.value)
+
+        if self.right is None:
+            return self.value
+        else:
+            return self.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+
+        if self.right:
+            self.right.for_each(fn)
+        if self.left:
+            self.left.for_each(fn)
+
+
+
+
 
     # Part 2 -----------------------
 
