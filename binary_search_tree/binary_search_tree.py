@@ -9,6 +9,10 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from queue import Queue
+from stack import Stack
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -85,17 +89,52 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node is None:  # If nothing there return nothing
+            return
+        if node.left:  # If there's a left branch
+            self.left.in_order_print(node.left)  # Recurse into the left branch
+        print(self.value)  # After all lefts have been accessed print the node
+        if node.right:  # Check if there's a right branch
+            self.right.in_order_print(node.right)  # Recurse into right branch which will then
+                                                    # look for left branches and so on...
+
+        # Matt wrote this during lecture
+        #self.in_order_print(self.left)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # Use a queue to pass in values
+        the_queue = Queue()
+        the_queue.enqueue(node)  # Start queue with base node
+
+        # while loop to get through the nodes in the queue
+        # First in first out makes it so we move left to right on each level 
+        # as long as the order has left before right in the checks
+        while the_queue.__len__() > 0:  # While there is anything in the queue
+            current_node = the_queue.dequeue()  # Take the first item from the queue
+            print(current_node.value)  # Print the value of the new node
+            if current_node.left:  # Check if there's a left branch
+                the_queue.enqueue(current_node.left)  # Add it to the queue
+            if current_node.right:  # Check if there's a right branch
+                the_queue.enqueue(current_node.right)  # Add it to the queue
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        # Set up the stack
+        the_stack = Stack()
+        the_stack.push(node)
+
+        while the_stack.__len__() > 0:  # While there is anything in the stack
+            current_node = the_stack.pop()  # Pop off the top of the stack
+            print(current_node.value)  # Print the value of the popped node
+            if current_node.left:  # Check if there's a left branch
+                the_stack.push(current_node.left)  # Add it to the stack
+            if current_node.right:  # Check if there's a right branch
+                the_stack.push(current_node.right)  # Add it to the stack
 
     # Stretch Goals -------------------------
     # Note: Research may be required
